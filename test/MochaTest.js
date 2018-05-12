@@ -1,4 +1,4 @@
-class Car 
+/*class Car 
 {
     park() {
     return 'stopped';
@@ -22,4 +22,4 @@ describe ('Car',() => {
     it('can drive',() => {
     assert.equal(car.drive(), 'vroom');
     });
-});
+});*/
