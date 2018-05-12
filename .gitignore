@@ -1,6 +1,4 @@
+node_modules/*
+*.suo
 # Visual Studio user specific files
 .vs/*
-
-node_modules/*
-
-*.suo
