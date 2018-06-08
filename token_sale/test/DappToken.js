@@ -11,7 +11,7 @@ contract('DappToken', function(accounts) {
             assert.equal(name, 'DApp Token', 'has the correct name');
             return tokenInstance.symbol();
         }).then(function(symbol) {
-            assert.equal(symbol, 'DAPP', 'has the correct symbol');
+            assert.equal(symbol, 'DApp', 'has the correct symbol');
             return tokenInstance.standard();
         }).then(function(standard) {
             assert.equal(standard, 'DApp Token v1.0', 'has the correct standard');
