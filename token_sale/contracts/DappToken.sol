@@ -20,6 +20,7 @@ contract DappToken {
     );
 
     mapping(address => uint256) public balanceOf;
+    mapping(address => mapping(address => uint256)) public allowance;
     
     constructor(uint256 _initialSupply) public {
         balanceOf[msg.sender] = _initialSupply;
@@ -36,6 +37,7 @@ contract DappToken {
     }
 
     function approve(address _spender, uint256 _value) public returns (bool success) {
+        allowance[msg.sender][_spender] = _value;
         Approval(msg.sender, _spender, _value);
         return true;
     }
