@@ -14,8 +14,8 @@ contract Lottery
        players.push(msg.sender);
    }
    
-   function Random() public view returns (uint){
-       return uint(sha256(block.difficulty,now,players));
+   function Random() public view returns (uint){      // returns us a random number
+       return uint(sha3(block.difficulty, now, players));    // hashing function that returns an uint
    }
    
    function pickWinner() public{
