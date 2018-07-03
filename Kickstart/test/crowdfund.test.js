@@ -40,6 +40,39 @@ describe('Crowdfunds', () => {
 
     it('Marks caller as the crowdfund manager', async () => {
         const manager = await crowdfund.methods.manager().call();
-        assert.equal(accounts[0], manager);
+        assert.equal(accounts[0], manager);   // manager account and accounts at 0 doesn't match
+    });
+
+    it('Allows people to contribute money and marks them as approvers', async () => {
+        await crowdfund.methods.contribute().send({
+            value: '200',
+            from: accounts[1]
+        });
+        const isContributor = await crowdfund.methods.approvers(accounts[1]).call();
+        assert(isContributor);
+    });
+
+    it('Requires a minimum contribution', async () => {
+        try {
+            await crowdfund.methods.contribute().send({
+            value: '15',
+        from: accounts[1]
+        });
+        assert(false);
+        }
+        catch (err) {
+        assert(err);
+        }
+    });
+
+    it('Allows a manager to make a payment request', async () => {
+        await crowdfund.methods
+            .createRequest('Buy batteries', '100', accounts[1])
+            .send({
+                from: accounts[0],
+                gas: '1000000'
+            });
+        const request = await crowdfund.methods.requests(0).call();
+        assert.equal('Buy batteries', request.description);
     });
 });
